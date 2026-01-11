@@ -12,6 +12,7 @@ const CONFIG = {
 function initMusic() {
     const bgMusic = document.getElementById('bgMusic');
     if (bgMusic) {
+        bgMusic.volume = 0.5;
         bgMusic.play().catch(() => {
             document.addEventListener('click', () => bgMusic.play(), { once: true });
         });
