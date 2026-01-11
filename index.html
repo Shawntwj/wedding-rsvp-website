@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wendy & Shawn | Wedding RSVP</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Hero Section -->
+    <div class="hero">
+        <div class="hero-content">
+            <h1 class="hero-names">
+                Wendy <span class="hero-ampersand">&</span> Shawn
+            </h1>
+            <div class="hero-divider"></div>
+            <p class="hero-date">November 28, 2026</p>
+            <p class="hero-subtitle">Join us in celebrating our special day</p>
+
+            <div class="hero-image">
+                <div class="carousel-container">
+                    <div class="carousel-track" id="carouselTrack">
+                        <div class="carousel-slide">
+                            <img src="sample.jpeg" alt="Wendy and Shawn - Photo 1">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="sample2.jpeg" alt="Wendy and Shawn - Photo 2">
+                        </div>
+                        <div class="carousel-slide">
+                            <img src="sample3.jpeg" alt="Wendy and Shawn - Photo 3">
+                        </div>
+                    </div>
+                    <button class="carousel-arrow carousel-arrow-left" id="prevSlide" aria-label="Previous slide">‹</button>
+                    <button class="carousel-arrow carousel-arrow-right" id="nextSlide" aria-label="Next slide">›</button>
+                    <div class="carousel-dots" id="carouselDots"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Events Timeline -->
+        <div class="events-section">
+            <h2 class="events-title">Celebration Schedule</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>⛪ Church Solemnization</h3>
+                        <p class="venue">Zion Presbyterian Church</p>
+                        <p class="time">10:00 AM - 12:00 PM</p>
+                        <p class="note">Lunch will be provided for guests</p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>🎉 Wedding Reception</h3>
+                        <p class="venue">Pan Pacific Hotel Singapore</p>
+                        <p class="time">4:30 PM - 8:00 PM</p>
+                        <p class="note">Ocean Ballroom, 2nd Floor</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- RSVP Form -->
+        <div class="rsvp-section">
+            <h2 class="rsvp-title">RSVP</h2>
+            <p class="rsvp-subtitle">We can't wait to celebrate with you! 💕</p>
+
+            <!-- Progress Steps -->
+            <div class="form-steps">
+                <div class="step active" data-step="1">
+                    <div class="step-number">1</div>
+                    <span>Your Info</span>
+                </div>
+                <div class="step" data-step="2">
+                    <div class="step-number">2</div>
+                    <span>Events</span>
+                </div>
+                <div class="step" data-step="3">
+                    <div class="step-number">3</div>
+                    <span>Details</span>
+                </div>
+            </div>
+
+            <form id="rsvpForm">
+                <!-- Step 1: Personal Info -->
+                <div class="form-step" data-step="1">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="fullName">
+                                Your Name <span class="required-mark">*</span>
+                            </label>
+                            <input type="text" class="form-input" id="fullName" required>
+                            <div class="error-message" id="nameError">Please enter your name</div>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label" for="phone">
+                                Phone Number <span class="required-mark">*</span>
+                            </label>
+                            <input type="tel" class="form-input" id="phone" required>
+                            <div class="error-message" id="phoneError">Please enter your phone number</div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Friend of... <span class="required-mark">*</span>
+                        </label>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" id="friend-bride" name="friendOf" value="Bride" required>
+                                <div class="option-content">
+                                    <div class="option-icon"></div>
+                                    <div class="option-text">
+                                        <div class="option-title">The Cutest Bride 👰</div>
+                                        <div class="option-subtitle">Wendy's guest</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" id="friend-groom" name="friendOf" value="Groom">
+                                <div class="option-content">
+                                    <div class="option-icon"></div>
+                                    <div class="option-text">
+                                        <div class="option-title">The Charming Groom 🤵</div>
+                                        <div class="option-subtitle">Shawn's guest</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label">
+                            Bringing a +1? <span class="required-mark">*</span>
+                        </label>
+                        <div class="options-grid">
+                            <label class="option-card">
+                                <input type="radio" id="plus-one-no" name="plusOne" value="No" required>
+                                <div class="option-content">
+                                    <div class="option-icon"></div>
+                                    <div class="option-text">
+                                        <div class="option-title">Flying Solo ✨</div>
+                                        <div class="option-subtitle">Just me!</div>
+                                    </div>
+                                </div>
+                            </label>
+                            <label class="option-card">
+                                <input type="radio" id="plus-one-yes" name="plusOne" value="Yes">
+                                <div class="option-content">
+                                    <div class="option-icon"></div>
+                                    <div class="option-text">
+                                        <div class="option-title">Bringing a +1 💑</div>
+                                        <div class="option-subtitle">Plus one guest</div>
+                                    </div>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group" id="plusOneNameSection" style="display: none;">
+                        <label class="form-label" for="plusOneName">
+                            Your +1's Name <span class="required-mark">*</span>
+                        </label>
+                        <input type="text" class="form-input" id="plusOneName" placeholder="Guest name">
+                        <div class="error-message" id="plusOneNameError">Please enter your +1's name</div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Event Selection -->
+                <div class="form-step" data-step="2" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label">
+                            Select Events to Attend <span class="required-mark">*</span>
+                        </label>
+
+                        <div class="guests-grid" id="guestsGrid">
+                            <!-- Your Events -->
+                            <div class="guest-card" id="yourCard">
+                                <div class="guest-card-header">
+                                    <span class="guest-card-icon">👤</span>
+                                    <h3 class="guest-card-title">You</h3>
+                                </div>
+                                <div class="event-checkbox-group">
+                                    <div class="event-checkbox" id="yourChurchCard">
+                                        <div class="event-checkbox-header">
+                                            <input type="checkbox" id="yourChurch" name="yourEvents" value="Church">
+                                            <label for="yourChurch" class="event-name">⛪ Church & Lunch</label>
+                                        </div>
+                                        <div class="event-details">10:00 AM - 12:00 PM</div>
+                                        <div class="event-options" id="yourChurchOptions">
+                                            <div class="form-group" style="margin-bottom: 0;">
+                                                <label class="form-label" for="yourLunchDietary" style="font-size: 12px;">Lunch Dietary Needs</label>
+                                                <textarea class="form-input" id="yourLunchDietary" rows="2" placeholder="Any dietary restrictions?"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="event-checkbox" id="yourReceptionCard">
+                                        <div class="event-checkbox-header">
+                                            <input type="checkbox" id="yourReception" name="yourEvents" value="Reception">
+                                            <label for="yourReception" class="event-name">🎉 Reception & Dinner</label>
+                                        </div>
+                                        <div class="event-details">4:30 PM - 8:00 PM</div>
+                                        <div class="event-options" id="yourReceptionOptions">
+                                            <div class="form-group" style="margin-bottom: 0;">
+                                                <label class="form-label" for="yourDinnerDietary" style="font-size: 12px;">Dinner Dietary Needs</label>
+                                                <input type="text" class="form-input" id="yourDinnerDietary" placeholder="Any dietary restrictions?">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Plus One Events -->
+                            <div class="guest-card disabled" id="plusOneCard">
+                                <div class="guest-card-header">
+                                    <span class="guest-card-icon">💑</span>
+                                    <h3 class="guest-card-title" id="plusOneCardTitle">Your +1</h3>
+                                </div>
+                                <div class="event-checkbox-group">
+                                    <div class="event-checkbox" id="plusOneChurchCard">
+                                        <div class="event-checkbox-header">
+                                            <input type="checkbox" id="plusOneChurch" name="plusOneEvents" value="Church">
+                                            <label for="plusOneChurch" class="event-name">⛪ Church & Lunch</label>
+                                        </div>
+                                        <div class="event-details">10:00 AM - 12:00 PM</div>
+                                        <div class="event-options" id="plusOneChurchOptions">
+                                            <div class="form-group" style="margin-bottom: 0;">
+                                                <label class="form-label" for="plusOneLunchDietary" style="font-size: 12px;">Lunch Dietary Needs</label>
+                                                <textarea class="form-input" id="plusOneLunchDietary" rows="2" placeholder="Any dietary restrictions?"></textarea>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="event-checkbox" id="plusOneReceptionCard">
+                                        <div class="event-checkbox-header">
+                                            <input type="checkbox" id="plusOneReception" name="plusOneEvents" value="Reception">
+                                            <label for="plusOneReception" class="event-name">🎉 Reception & Dinner</label>
+                                        </div>
+                                        <div class="event-details">4:30 PM - 8:00 PM</div>
+                                        <div class="event-options" id="plusOneReceptionOptions">
+                                            <div class="form-group" style="margin-bottom: 0;">
+                                                <label class="form-label" for="plusOneDinnerDietary" style="font-size: 12px;">Dinner Dietary Needs</label>
+                                                <input type="text" class="form-input" id="plusOneDinnerDietary" placeholder="Any dietary restrictions?">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="error-message" id="eventsError">Please select at least one event</div>
+                    </div>
+                </div>
+
+                <!-- Step 3: Additional Details -->
+                <div class="form-step" data-step="3" style="display: none;">
+                    <div class="form-group">
+                        <label class="form-label" for="song">Song Request (Optional)</label>
+                        <input type="text" class="form-input" id="song" placeholder="A song you'd like to hear at the reception">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-label" for="message">Message for the Couple (Optional)</label>
+                        <textarea class="form-input" id="message" placeholder="Share your well wishes or a favorite memory"></textarea>
+                    </div>
+                </div>
+
+                <!-- Form Actions -->
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">Previous</button>
+                    <button type="button" class="btn btn-primary" id="nextBtn">Continue</button>
+                    <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">Send RSVP</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal-overlay" id="successModal">
+        <div class="modal">
+            <div class="modal-icon">✓</div>
+            <h3 class="modal-title">RSVP Confirmed!</h3>
+            <p class="modal-text">Thank you for your response. We can't wait to celebrate with you on our special day!</p>
+            <button class="btn btn-primary" onclick="closeModal()">Close</button>
+        </div>
+    </div>
+
+    <audio id="bgMusic" loop>
+        <source src="Steal The Show.mp3" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
