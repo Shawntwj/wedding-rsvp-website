@@ -11,9 +11,11 @@ const CONFIG = {
 // ============================================
 function initMusic() {
     const bgMusic = document.getElementById('bgMusic');
-    bgMusic.play().catch(() => {
-        document.addEventListener('click', () => bgMusic.play(), { once: true });
-    });
+    if (bgMusic) {
+        bgMusic.play().catch(() => {
+            document.addEventListener('click', () => bgMusic.play(), { once: true });
+        });
+    }
 }
 
 // ============================================
@@ -54,8 +56,9 @@ const Carousel = {
 
     goToSlide(index) {
         this.currentSlide = index;
-        const offset = -this.currentSlide * 100;
-        this.track.style.transform = `translateX(${offset}%)`;
+        const slideWidth = this.track.parentElement.offsetWidth;
+        const offset = -this.currentSlide * slideWidth;
+        this.track.style.transform = `translateX(${offset}px)`;
         this.updateDots();
     },
 
