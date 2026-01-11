@@ -2,7 +2,7 @@
 // CONFIGURATION
 // ============================================
 const CONFIG = {
-    GOOGLE_SCRIPT_URL: 'YOUR_GOOGLE_SCRIPT_URL_HERE',
+    GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzjmeZ7ZyHqZtNagSVHZf0iDacGUTZMPRTrCuby2sPST49eoTTfZidtOljEc14RUARo/exec',
     CAROUSEL_INTERVAL: 5000, // 5 seconds
 };
 
