@@ -824,11 +824,15 @@ textarea.form-input {
     }
 
     .timeline {
-        padding-left: 40px;
+        padding-left: 50px;
+    }
+
+    .timeline::before {
+        left: 16px;
     }
 
     .timeline-dot {
-        left: -32px;
+        left: -42px;
     }
 
     .form-actions {
