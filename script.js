@@ -24,8 +24,72 @@ const MusicControl = {
     volumeControl: null,
     wrapper: null,
     isPlaying: false,
+    currentSongName: '',
 
-    init() {
+    async discoverMusic() {
+        const musicExtensions = ['mp3', 'wav', 'ogg', 'm4a'];
+        const discoveredMusic = [];
+        let consecutiveMisses = 0;
+
+        // Try to load music files sequentially
+        for (let i = 1; i <= CONFIG.MAX_MUSIC_COUNT; i++) {
+            let found = false;
+            for (const ext of musicExtensions) {
+                const filename = `music${i}.${ext}`;
+                const exists = await this.checkMusicExists(filename);
+
+                if (exists) {
+                    discoveredMusic.push(filename);
+                    found = true;
+                    consecutiveMisses = 0;
+                    break;
+                }
+            }
+
+            if (!found) {
+                consecutiveMisses++;
+                // Stop if we've missed 5 consecutive files and have found at least one
+                if (consecutiveMisses >= 5 && discoveredMusic.length > 0) {
+                    break;
+                }
+            }
+        }
+
+        // Also try common music file names
+        const commonNames = [
+            'LUV.mp3',
+            'Steal The Show.mp3',
+            'background.mp3',
+            'bgm.mp3',
+            'wedding.mp3'
+        ];
+
+        for (const filename of commonNames) {
+            const exists = await this.checkMusicExists(filename);
+            if (exists && !discoveredMusic.includes(filename)) {
+                discoveredMusic.push(filename);
+            }
+        }
+
+        console.log(`Discovered ${discoveredMusic.length} music files:`, discoveredMusic);
+        return discoveredMusic;
+    },
+
+    checkMusicExists(filename) {
+        return new Promise((resolve) => {
+            const audio = new Audio();
+            audio.oncanplaythrough = () => resolve(true);
+            audio.onerror = () => resolve(false);
+            audio.src = CONFIG.MUSIC_PATH + filename;
+        });
+    },
+
+    getDisplayName(filename) {
+        // Remove file extension and clean up the name
+        return filename.replace(/\.[^/.]+$/, '');
+    },
+
+    async init() {
         this.bgMusic = document.getElementById('bgMusic');
         this.controlBtn = document.getElementById('musicControl');
         this.statusText = this.controlBtn.querySelector('.music-status');
@@ -35,6 +99,25 @@ const MusicControl = {
         this.wrapper = document.querySelector('.music-control-wrapper');
 
         if (!this.bgMusic || !this.controlBtn) return;
+
+        // Discover and randomly select music
+        const musicFiles = await this.discoverMusic();
+        if (musicFiles.length > 0) {
+            const randomIndex = Math.floor(Math.random() * musicFiles.length);
+            const selectedMusic = musicFiles[randomIndex];
+
+            // Update audio source
+            this.bgMusic.src = CONFIG.MUSIC_PATH + selectedMusic;
+            this.currentSongName = this.getDisplayName(selectedMusic);
+
+            // Update the music title in the UI
+            const musicTitle = this.controlBtn.querySelector('.music-title');
+            if (musicTitle) {
+                musicTitle.textContent = this.currentSongName;
+            }
+
+            console.log(`Selected music: ${selectedMusic}`);
+        }
 
         // Set initial volume
         const initialVolume = 0.5;
@@ -144,8 +227,8 @@ const MusicControl = {
     }
 };
 
-function initMusic() {
-    MusicControl.init();
+async function initMusic() {
+    await MusicControl.init();
 }
 
 // ============================================
