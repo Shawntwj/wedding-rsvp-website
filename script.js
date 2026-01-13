@@ -5,32 +5,11 @@ const CONFIG = {
     GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzjmeZ7ZyHqZtNagSVHZf0iDacGUTZMPRTrCuby2sPST49eoTTfZidtOljEc14RUARo/exec',
     CAROUSEL_INTERVAL: 5000, // 5 seconds
     CAROUSEL_IMAGES_PATH: 'resources/img/',
-    // Add your image filenames here - they will be randomized automatically
-    CAROUSEL_IMAGES: [
-        'sample.jpeg',
-        'sample2.jpeg',
-        'sample3.jpeg',
-        'sample4.jpeg',
-        'sample5.jpeg',
-        'sample6.jpeg',
-        'sample7.jpeg',
-        'sample8.jpeg',
-        'sample9.jpeg',
-        'sample10.jpeg',
-        'sample11.jpeg',
-        'sample12.jpeg',
-        'sample13.jpeg',
-        'sample14.jpeg',
-        'sample15.jpeg',
-        'sample16.jpeg',
-        'sample17.jpeg',
-        'sample18.jpeg',
-        'sample19.jpeg',
-        'sample20.jpeg',
-        'sample21.jpeg',
-        'sample22.jpeg',
-        'sample23.jpeg'
-    ]
+    // The number of images to try loading (adjust this based on how many images you have)
+    MAX_IMAGE_COUNT: 50,
+    MUSIC_PATH: 'resources/music/',
+    // Maximum number of music files to try discovering
+    MAX_MUSIC_COUNT: 20
 };
 
 // ============================================
@@ -187,9 +166,61 @@ const Carousel = {
         return shuffled;
     },
 
-    loadImages() {
+    checkImageExists(filename) {
+        return new Promise((resolve) => {
+            const img = new Image();
+            img.onload = () => resolve(true);
+            img.onerror = () => resolve(false);
+            img.src = CONFIG.CAROUSEL_IMAGES_PATH + filename;
+        });
+    },
+
+    async discoverImages() {
+        const imageExtensions = ['jpeg', 'jpg', 'png', 'gif', 'webp'];
+        const discoveredImages = [];
+        let consecutiveMisses = 0;
+
+        // Try to load images sequentially (sample1.jpeg, sample2.jpeg, etc.)
+        for (let i = 1; i <= CONFIG.MAX_IMAGE_COUNT; i++) {
+            // Try each extension
+            let found = false;
+            for (const ext of imageExtensions) {
+                const filename = `sample${i}.${ext}`;
+                const exists = await this.checkImageExists(filename);
+
+                if (exists) {
+                    discoveredImages.push(filename);
+                    found = true;
+                    consecutiveMisses = 0;
+                    break; // Found this image, move to next number
+                }
+            }
+
+            if (!found) {
+                consecutiveMisses++;
+                // Stop if we've missed 5 consecutive images and have found at least one
+                if (consecutiveMisses >= 5 && discoveredImages.length > 0) {
+                    break;
+                }
+            }
+        }
+
+        console.log(`Discovered ${discoveredImages.length} images:`, discoveredImages);
+        return discoveredImages;
+    },
+
+    async loadImages() {
+        // Discover images dynamically
+        const images = await this.discoverImages();
+
+        if (images.length === 0) {
+            console.error('No images found in', CONFIG.CAROUSEL_IMAGES_PATH);
+            return;
+        }
+
         // Randomize the images array
-        const randomizedImages = this.shuffleArray(CONFIG.CAROUSEL_IMAGES);
+        const randomizedImages = this.shuffleArray(images);
+        console.log('Loading randomized images:', randomizedImages);
 
         // Create carousel slides for each image
         randomizedImages.forEach((filename, index) => {
@@ -205,15 +236,20 @@ const Carousel = {
         });
     },
 
-    init() {
+    async init() {
         this.track = document.getElementById('carouselTrack');
         this.dotsContainer = document.getElementById('carouselDots');
 
         // Load and randomize images first
-        this.loadImages();
+        await this.loadImages();
 
         this.slides = document.querySelectorAll('.carousel-slide');
         this.totalSlides = this.slides.length;
+
+        if (this.totalSlides === 0) {
+            console.error('No carousel slides created');
+            return;
+        }
 
         this.createDots();
         this.attachEventListeners();
@@ -621,8 +657,8 @@ function closeModal() {
 // ============================================
 // INITIALIZATION
 // ============================================
-document.addEventListener('DOMContentLoaded', () => {
+document.addEventListener('DOMContentLoaded', async () => {
     initMusic();
-    Carousel.init();
+    await Carousel.init();
     RSVPForm.init();
 });
