@@ -8,6 +8,27 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <!-- Music Control Button -->
+    <div class="music-control-wrapper">
+        <button id="musicControl" class="music-control" aria-label="Music control">
+            <svg class="music-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M9 18V5l12-2v13M9 18c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zm12-2c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <div class="music-info">
+                <span class="music-status">Music Playing</span>
+                <span class="music-title">Steal The Show</span>
+            </div>
+        </button>
+        <div class="volume-control" id="volumeControl">
+            <svg class="volume-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <path class="volume-wave" d="M15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="50" aria-label="Volume control">
+            <span class="volume-percentage" id="volumePercentage">50%</span>
+        </div>
+    </div>
+
     <!-- Hero Section -->
     <div class="hero">
         <div class="hero-content">
@@ -21,18 +42,7 @@
             <div class="hero-image">
                 <div class="carousel-container">
                     <div class="carousel-track" id="carouselTrack">
-                        <div class="carousel-slide">
-                            <img src="resources/img/sample.jpeg" alt="Wendy and Shawn - Photo 1">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="resources/img/sample2.jpeg" alt="Wendy and Shawn - Photo 2">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="resources/img/sample3.jpeg" alt="Wendy and Shawn - Photo 3">
-                        </div>
-                        <div class="carousel-slide">
-                            <img src="resources/img/sample4.jpeg" alt="Wendy and Shawn - Photo 4">
-                        </div>
+                        <!-- Carousel slides will be dynamically loaded -->
                     </div>
                     <button class="carousel-arrow carousel-arrow-left" id="prevSlide" aria-label="Previous slide">‹</button>
                     <button class="carousel-arrow carousel-arrow-right" id="nextSlide" aria-label="Next slide">›</button>

@@ -4,19 +4,169 @@
 const CONFIG = {
     GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzjmeZ7ZyHqZtNagSVHZf0iDacGUTZMPRTrCuby2sPST49eoTTfZidtOljEc14RUARo/exec',
     CAROUSEL_INTERVAL: 5000, // 5 seconds
+    CAROUSEL_IMAGES_PATH: 'resources/img/',
+    // Add your image filenames here - they will be randomized automatically
+    CAROUSEL_IMAGES: [
+        'sample.jpeg',
+        'sample2.jpeg',
+        'sample3.jpeg',
+        'sample4.jpeg',
+        'sample5.jpeg',
+        'sample6.jpeg',
+        'sample7.jpeg',
+        'sample8.jpeg',
+        'sample9.jpeg',
+        'sample10.jpeg',
+        'sample11.jpeg',
+        'sample12.jpeg',
+        'sample13.jpeg',
+        'sample14.jpeg',
+        'sample15.jpeg',
+        'sample16.jpeg',
+        'sample17.jpeg',
+        'sample18.jpeg',
+        'sample19.jpeg',
+        'sample20.jpeg',
+        'sample21.jpeg',
+        'sample22.jpeg',
+        'sample23.jpeg'
+    ]
 };
 
 // ============================================
 // MUSIC AUTOPLAY
 // ============================================
-function initMusic() {
-    const bgMusic = document.getElementById('bgMusic');
-    if (bgMusic) {
-        bgMusic.volume = 0.5;
-        bgMusic.play().catch(() => {
-            document.addEventListener('click', () => bgMusic.play(), { once: true });
+const MusicControl = {
+    bgMusic: null,
+    controlBtn: null,
+    statusText: null,
+    volumeSlider: null,
+    volumePercentage: null,
+    volumeControl: null,
+    wrapper: null,
+    isPlaying: false,
+
+    init() {
+        this.bgMusic = document.getElementById('bgMusic');
+        this.controlBtn = document.getElementById('musicControl');
+        this.statusText = this.controlBtn.querySelector('.music-status');
+        this.volumeSlider = document.getElementById('volumeSlider');
+        this.volumePercentage = document.getElementById('volumePercentage');
+        this.volumeControl = document.getElementById('volumeControl');
+        this.wrapper = document.querySelector('.music-control-wrapper');
+
+        if (!this.bgMusic || !this.controlBtn) return;
+
+        // Set initial volume
+        const initialVolume = 0.5;
+        this.bgMusic.volume = initialVolume;
+        this.volumeSlider.value = initialVolume * 100;
+        this.updateVolumeUI();
+
+        // Try to autoplay
+        this.bgMusic.play()
+            .then(() => {
+                this.isPlaying = true;
+                this.updatePlaybackUI();
+            })
+            .catch(() => {
+                // If autoplay fails, wait for user interaction
+                this.isPlaying = false;
+                this.updatePlaybackUI();
+                document.addEventListener('click', () => this.play(), { once: true });
+            });
+
+        // Add click handler to toggle music
+        this.controlBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            this.toggle();
         });
+
+        // Add volume slider handler
+        this.volumeSlider.addEventListener('input', (e) => {
+            const volume = e.target.value / 100;
+            this.setVolume(volume);
+        });
+
+        // Mobile: toggle volume control visibility on tap
+        if ('ontouchstart' in window) {
+            this.controlBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.wrapper.classList.toggle('show-volume');
+            });
+
+            // Close volume control when tapping outside
+            document.addEventListener('click', (e) => {
+                if (!this.wrapper.contains(e.target)) {
+                    this.wrapper.classList.remove('show-volume');
+                }
+            });
+        }
+    },
+
+    play() {
+        if (this.bgMusic && this.bgMusic.paused) {
+            this.bgMusic.play();
+            this.isPlaying = true;
+            this.updatePlaybackUI();
+        }
+    },
+
+    pause() {
+        if (this.bgMusic && !this.bgMusic.paused) {
+            this.bgMusic.pause();
+            this.isPlaying = false;
+            this.updatePlaybackUI();
+        }
+    },
+
+    toggle() {
+        if (this.isPlaying) {
+            this.pause();
+        } else {
+            this.play();
+        }
+    },
+
+    setVolume(volume) {
+        if (this.bgMusic) {
+            this.bgMusic.volume = volume;
+            this.updateVolumeUI();
+        }
+    },
+
+    updatePlaybackUI() {
+        if (this.isPlaying) {
+            this.controlBtn.classList.remove('paused');
+            this.statusText.textContent = 'Music Playing';
+        } else {
+            this.controlBtn.classList.add('paused');
+            this.statusText.textContent = 'Music Paused';
+        }
+    },
+
+    updateVolumeUI() {
+        const volume = this.bgMusic.volume;
+        const percentage = Math.round(volume * 100);
+
+        // Update percentage display
+        this.volumePercentage.textContent = `${percentage}%`;
+
+        // Update slider gradient
+        const gradientValue = percentage;
+        this.volumeSlider.style.background = `linear-gradient(to right, var(--rose) 0%, var(--rose) ${gradientValue}%, var(--border) ${gradientValue}%, var(--border) 100%)`;
+
+        // Toggle muted class
+        if (percentage === 0) {
+            this.volumeControl.classList.add('muted');
+        } else {
+            this.volumeControl.classList.remove('muted');
+        }
     }
+};
+
+function initMusic() {
+    MusicControl.init();
 }
 
 // ============================================
@@ -27,9 +177,41 @@ const Carousel = {
     totalSlides: 0,
     autoPlayTimer: null,
 
+    // Fisher-Yates shuffle algorithm to randomize array
+    shuffleArray(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
+    },
+
+    loadImages() {
+        // Randomize the images array
+        const randomizedImages = this.shuffleArray(CONFIG.CAROUSEL_IMAGES);
+
+        // Create carousel slides for each image
+        randomizedImages.forEach((filename, index) => {
+            const slide = document.createElement('div');
+            slide.classList.add('carousel-slide');
+
+            const img = document.createElement('img');
+            img.src = CONFIG.CAROUSEL_IMAGES_PATH + filename;
+            img.alt = `Wendy and Shawn - Photo ${index + 1}`;
+
+            slide.appendChild(img);
+            this.track.appendChild(slide);
+        });
+    },
+
     init() {
         this.track = document.getElementById('carouselTrack');
         this.dotsContainer = document.getElementById('carouselDots');
+
+        // Load and randomize images first
+        this.loadImages();
+
         this.slides = document.querySelectorAll('.carousel-slide');
         this.totalSlides = this.slides.length;
 
