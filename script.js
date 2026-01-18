@@ -6,10 +6,8 @@ const CONFIG = {
     CAROUSEL_INTERVAL: 5000, // 5 seconds
     CAROUSEL_IMAGES_PATH: 'resources/img/',
     // The number of images to try loading (adjust this based on how many images you have)
-    MAX_IMAGE_COUNT: 50,
+    MAX_IMAGE_COUNT: 9,
     MUSIC_PATH: 'resources/music/',
-    // Maximum number of music files to try discovering
-    MAX_MUSIC_COUNT: 20
 };
 
 // ============================================
@@ -27,56 +25,32 @@ const MusicControl = {
     currentSongName: '',
 
     async discoverMusic() {
-        const musicExtensions = ['mp3', 'wav', 'ogg', 'm4a'];
-        const discoveredMusic = [];
-        let consecutiveMisses = 0;
-
-        // Try to load music files sequentially
-        for (let i = 1; i <= CONFIG.MAX_MUSIC_COUNT; i++) {
-            let found = false;
-            for (const ext of musicExtensions) {
-                const filename = `music${i}.${ext}`;
-                const exists = await this.checkMusicExists(filename);
-
-                if (exists) {
-                    discoveredMusic.push(filename);
-                    found = true;
-                    consecutiveMisses = 0;
-                    break;
-                }
-            }
-
-            if (!found) {
-                consecutiveMisses++;
-                // Stop if we've missed 5 consecutive files and have found at least one
-                if (consecutiveMisses >= 5 && discoveredMusic.length > 0) {
-                    break;
-                }
-            }
-        }
-
-        // Also try common music file names
-        const commonNames = [
-            'Apink - LUV.mp3',
+        // Hardcoded music files to avoid console errors from discovery
+        const musicFiles = [
             'Lauv - Steal The Show.mp3'
         ];
 
-        for (const filename of commonNames) {
-            const exists = await this.checkMusicExists(filename);
-            if (exists && !discoveredMusic.includes(filename)) {
-                discoveredMusic.push(filename);
-            }
-        }
-
-        console.log(`Discovered ${discoveredMusic.length} music files:`, discoveredMusic);
-        return discoveredMusic;
+        console.log(`Loaded ${musicFiles.length} music files:`, musicFiles);
+        return musicFiles;
     },
 
     checkMusicExists(filename) {
         return new Promise((resolve) => {
             const audio = new Audio();
-            audio.oncanplaythrough = () => resolve(true);
-            audio.onerror = () => resolve(false);
+            const timeoutId = setTimeout(() => resolve(false), 1000);
+
+            audio.oncanplaythrough = () => {
+                clearTimeout(timeoutId);
+                resolve(true);
+            };
+
+            audio.onerror = () => {
+                clearTimeout(timeoutId);
+                resolve(false);
+            };
+
+            // Preload metadata only to avoid unnecessary downloads
+            audio.preload = 'metadata';
             audio.src = CONFIG.MUSIC_PATH + filename;
         });
     },
