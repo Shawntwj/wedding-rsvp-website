@@ -58,8 +58,7 @@ const MusicControl = {
         // Also try common music file names
         const commonNames = [
             'Apink - LUV.mp3',
-            'Lauv - Steal The Show.mp3',
-            'Sasablue - 最後一頁.mp3'
+            'Lauv - Steal The Show.mp3'
         ];
 
         for (const filename of commonNames) {
