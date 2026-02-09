@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>RSVP Confirmation</title>
+    </head>
+    <body style="margin: 0; padding: 0; font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; background-color: #FFF9F5;">
+      <table role="presentation" width="100%" cellspacing="0" cellpadding="0" border="0">
+        <tr>
+          <td align="center" style="padding: 20px 0;">
+            <table role="presentation" style="max-width: 600px; background: #FFFFFF;" cellspacing="0" cellpadding="0" border="0">
+
+              <!-- Header -->
+              <tr>
+                <td style="background: linear-gradient(135deg, #E09CB5 0%, #B88197 100%); padding: 40px 30px; text-align: center; color: #FFFFFF;">
+                  <h1 style="font-family: Georgia, 'Times New Roman', serif; font-size: 36px; font-weight: 400; margin: 0 0 10px 0; letter-spacing: 2px;">
+                    Shawn <span style="font-size: 42px; font-style: italic; margin: 0 8px;">&</span> Wendy
+                  </h1>
+                  <div style="width: 80px; height: 2px; background: rgba(255, 255, 255, 0.5); margin: 20px auto;"></div>
+                  <p style="font-size: 16px; font-weight: 300; margin: 10px 0 0 0; opacity: 0.95; letter-spacing: 1px;">November 28, 2026</p>
+                </td>
+              </tr>
+
+              <!-- Content -->
+              <tr>
+                <td style="padding: 40px 30px;">
+                  <p style="font-size: 18px; color: #2D1E24; margin: 0 0 20px 0; font-weight: 500;">Dear ${data.fullName},</p>
+
+                  <p style="font-size: 15px; color: #7A6670; line-height: 1.6; margin: 0 0 30px 0;">
+                    Thank you for your RSVP! We're absolutely delighted that you'll be joining us
+                    to celebrate our special day. This email confirms your attendance details.
+                  </p>
+
+                  <!-- RSVP Details -->
+                  <div style="background: #FFF9F5; border-left: 4px solid #E09CB5; padding: 25px; margin: 30px 0; border-radius: 4px;">
+                    <h2 style="font-family: Georgia, 'Times New Roman', serif; font-size: 22px; color: #8B5A6F; margin: 0 0 20px 0; font-weight: 400;">Your RSVP Summary</h2>
+                    ${guestDetailsHTML}
+                  </div>
+
+                  <!-- Event Details -->
+                  <h2 style="font-family: Georgia, 'Times New Roman', serif; font-size: 24px; color: #8B5A6F; text-align: center; margin: 30px 0 25px 0;">Event Details</h2>
+
+                  ${attendingChurch ? `
+                    <div style="background: #FFFFFF; border: 2px solid #F0DCE3; border-radius: 8px; padding: 25px; margin: 20px 0;">
+                      <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 20px; color: #8B5A6F; margin: 0 0 15px 0; font-weight: 400;">
+                        <span style="font-size: 24px; margin-right: 10px;">⛪</span> Church Solemnization
+                      </h3>
+                      <div style="color: #2D1E24; line-height: 1.8; font-size: 14px;">
+                        <p style="margin: 5px 0;"><strong style="color: #8B5A6F;">Venue:</strong> ${EMAIL_CONFIG.churchName}</p>
+                        <p style="margin: 5px 0;"><strong style="color: #8B5A6F;">Time:</strong> ${EMAIL_CONFIG.churchTime}</p>
+                        <p style="margin: 5px 0;"><strong style="color: #8B5A6F;">Note:</strong> Lunch will be provided for guests after the ceremony</p>
+                      </div>
+                    </div>
+                  ` : ''}
+
+                  ${attendingReception ? `
+                    <div style="background: #FFFFFF; border: 2px solid #F0DCE3; border-radius: 8px; padding: 25px; margin: 20px 0;">
+                      <h3 style="font-family: Georgia, 'Times New Roman', serif; font-size: 20px; color: #8B5A6F; margin: 0 0 15px 0; font-weight: 400;">
+                        <span style="font-size: 24px; margin-right: 10px;">★</span> Wedding Reception
+                      </h3>
+                      <div style="color: #2D1E24; line-height: 1.8; font-size: 14px;">
+                        <p style="margin: 5px 0;"><strong style="color: #8B5A6F;">Venue:</strong> ${EMAIL_CONFIG.receptionVenue}</p>
+                        <p style="margin: 5px 0;"><strong style="color: #8B5A6F;">Location:</strong> ${EMAIL_CONFIG.receptionLocation}</p>
+                        <p style="margin: 5px 0;"><strong style="color: #8B5A6F;">Time:</strong> ${EMAIL_CONFIG.receptionTime}</p>
+                        <p style="margin: 5px 0;"><strong style="color: #8B5A6F;">Dress Code:</strong> Cocktail attire</p>
+                      </div>
+                    </div>
+                  ` : ''}
+
+                  ${data.song && data.song !== 'N/A' ? `
+                    <div style="background: #F4F4F4; padding: 20px; border-radius: 4px; margin: 25px 0;">
+                      <h3 style="font-size: 16px; color: #8B5A6F; margin: 0 0 10px 0; font-weight: 600;">♪ Song Request</h3>
+                      <p style="font-size: 14px; color: #7A6670; margin: 5px 0; line-height: 1.6;">We'll do our best to play: <strong>${data.song}</strong></p>
+                    </div>
+                  ` : ''}
+
+                  ${data.message && data.message !== 'N/A' ? `
+                    <div style="background: #F4F4F4; padding: 20px; border-radius: 4px; margin: 25px 0;">
+                      <h3 style="font-size: 16px; color: #8B5A6F; margin: 0 0 10px 0; font-weight: 600;">♡ Your Message</h3>
+                      <p style="font-size: 14px; color: #7A6670; margin: 5px 0; line-height: 1.6;"><em>"${data.message}"</em></p>
+                      <p style="font-size: 14px; color: #7A6670; margin: 10px 0 5px 0; line-height: 1.6;">Thank you for your lovely words!</p>
+                    </div>
+                  ` : ''}
+
+                  <p style="font-size: 15px; color: #7A6670; line-height: 1.6; margin: 30px 0 0 0;">
+                    We can't wait to celebrate with you! If you need to make any changes to your RSVP,
+                    please contact us as soon as possible.
+                  </p>
+                </td>
+              </tr>
+
+              <!-- Footer -->
+              <tr>
+                <td style="background: #FFF9F5; padding: 30px; text-align: center; border-top: 2px solid #F0DCE3;">
+                  <div style="font-size: 20px; margin: 15px 0;">♡ ✨ ♡</div>
+                  <p style="font-weight: 600; color: #8B5A6F; font-size: 14px; margin: 15px 0;">
+                    With love,<br>Shawn & Wendy
+                  </p>
+                  <p style="font-size: 13px; color: #7A6670; margin: 8px 0; line-height: 1.6;">
+                    Questions? Contact us at
+                    <a href="mailto:${EMAIL_CONFIG.contactEmail}" style="color: #E09CB5; text-decoration: none;">${EMAIL_CONFIG.contactEmail}</a>
+                  </p>
+                  <p style="font-size: 12px; color: #B0A4AB; margin: 20px 0 8px 0;">
+                    This is an automated confirmation email. Please do not reply to this message.
+                  </p>
+                </td>
+              </tr>
+
+            </table>
+          </td>
+        </tr>
+      </table>
+
+      <!-- Inline styles for elements -->
+      <style>
+        .guest-info { margin: 15px 0; }
+        .guest-name { font-size: 16px; font-weight: 600; color: #2D1E24; margin: 0 0 8px 0; }
+        .event-list { list-style: none; padding: 0; margin: 5px 0 0 0; }
+        .event-list li { padding: 5px 0 5px 25px; position: relative; color: #7A6670; font-size: 14px; }
+        .event-list li:before { content: "✓"; position: absolute; left: 0; color: #6B9F7E; font-weight: bold; }
+        .dietary-note { font-size: 13px; color: #7A6670; font-style: italic; margin: 3px 0 0 0; }
+      </style>
+    </body>
+    </html>

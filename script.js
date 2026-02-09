@@ -2,7 +2,7 @@
 // CONFIGURATION
 // ============================================
 const CONFIG = {
-    GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbzjmeZ7ZyHqZtNagSVHZf0iDacGUTZMPRTrCuby2sPST49eoTTfZidtOljEc14RUARo/exec',
+    GOOGLE_SCRIPT_URL: 'https://script.google.com/macros/s/AKfycbwXAt6krZ_PcxjM3kbwOtvrOj-Uw8seo9ArGAct2ThJgvIKPV78zLbrcad8muk1kPdS/exec',
     CAROUSEL_INTERVAL: 5000, // 5 seconds
     CAROUSEL_IMAGES_PATH: 'resources/img/',
     // The number of images to try loading (adjust this based on how many images you have)
@@ -389,6 +389,7 @@ const RSVPForm = {
     },
 
     setupEventListeners() {
+        
         this.nextBtn.addEventListener('click', () => this.handleNext());
         this.prevBtn.addEventListener('click', () => this.handlePrev());
         this.form.addEventListener('submit', (e) => this.handleSubmit(e));
@@ -396,6 +397,14 @@ const RSVPForm = {
         document.getElementById('plusOneName').addEventListener('input', (e) => {
             const title = document.getElementById('plusOneCardTitle');
             title.textContent = e.target.value.trim() || 'Your +1';
+        });
+
+
+        document.getElementById('phone').addEventListener('keypress', (e) => {
+            // Only allow digits and basic phone symbols
+            if (!/[0-9\s\+\-\(\)]/.test(e.key)) {
+                e.preventDefault();
+            }
         });
     },
 
@@ -523,6 +532,7 @@ const RSVPForm = {
         const errors = [];
         const name = document.getElementById('fullName').value.trim();
         const phone = document.getElementById('phone').value.trim();
+        const email = document.getElementById('email').value.trim();
         const friendOf = document.querySelector('input[name="friendOf"]:checked');
         const plusOne = document.querySelector('input[name="plusOne"]:checked');
 
@@ -538,6 +548,18 @@ const RSVPForm = {
             this.showError('phoneError', 'phone');
         } else {
             this.hideError('phoneError', 'phone');
+        }
+
+        // Validate email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email) {
+            errors.push('email');
+            this.showError('emailError', 'email');
+        } else if (!emailRegex.test(email)) {
+            errors.push('email');
+            this.showError('emailError', 'email');
+        } else {
+            this.hideError('emailError', 'email');
         }
 
         if (!friendOf || !plusOne) {
@@ -620,6 +642,12 @@ const RSVPForm = {
 
         const formData = this.collectFormData();
 
+        // Log the submission data for debugging
+        console.log('📝 RSVP Submission Data:', formData);
+        console.log('📧 Email:', formData.email);
+        console.log('👤 Name:', formData.fullName);
+        console.log('📱 Phone:', formData.phone);
+
         try {
             await this.submitToGoogleSheets(formData);
 
@@ -650,6 +678,7 @@ const RSVPForm = {
         return {
             timestamp: new Date().toISOString(),
             fullName: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
             phone: document.getElementById('phone').value,
             friendOf: document.querySelector('input[name="friendOf"]:checked').value,
             hasPlusOne: hasPlusOne ? 'Yes' : 'No',
@@ -670,6 +699,9 @@ const RSVPForm = {
     },
 
     async submitToGoogleSheets(formData) {
+        console.log('🚀 Sending to Google Sheets:', CONFIG.GOOGLE_SCRIPT_URL);
+        console.log('📦 Data being sent:', JSON.stringify(formData, null, 2));
+
         const response = await fetch(CONFIG.GOOGLE_SCRIPT_URL, {
             method: 'POST',
             mode: 'no-cors',
@@ -679,6 +711,7 @@ const RSVPForm = {
             body: JSON.stringify(formData)
         });
 
+        console.log('✅ Request completed (note: no-cors mode limits response info)');
         return response;
     },
 
