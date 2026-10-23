@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="description" content="Shawn and Wendy's wedding on 28 November 2026. Programme, venues, travel details and family tea ceremonies.">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Shawn & Wendy | Wedding RSVP</title>
+    <title>Shawn & Wendy | Wedding Guest Guide</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
@@ -36,9 +37,11 @@
                 Shawn <span class="hero-ampersand">&</span> Wendy
             </h1>
             <div class="hero-divider"></div>
-            <p class="hero-date">November 28, 2026</p>
-            <p class="hero-subtitle">Join us in celebrating our special day</p>
-            <a class="photo-shortcut" href="#photos">Share your photos</a>
+            <p class="hero-date">Saturday, 28 November 2026</p>
+            <p class="hero-subtitle">All the little details for our big day</p>
+            <nav class="guest-nav" aria-label="Wedding information">
+                <a href="#programme">Programme</a><a href="#travel">Getting there</a><a href="#family">For family</a><a href="#photos">Share photos</a>
+            </nav>
 
             <div class="hero-image">
                 <div class="carousel-container">
@@ -54,30 +57,73 @@
     </div>
 
     <div class="container">
-        <!-- Events Timeline -->
-        <div class="events-section">
-            <h2 class="events-title">Celebration Schedule</h2>
-            <div class="timeline">
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>⛪ Church Solemnization</h3>
-                        <p class="venue">Zion Presbyterian Church</p>
-                        <p class="time">10:30 AM - 12:30 PM</p>
-                        <p class="note">Lunch will be provided for guests</p>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-dot"></div>
-                    <div class="timeline-content">
-                        <h3>🎉 Wedding Reception</h3>
-                        <p class="venue">Pan Pacific Hotel Singapore</p>
-                        <p class="time">7:00 PM - 11:00 PM</p>
-                        <p class="note">Ocean Ballroom, 2nd Floor</p>
-                    </div>
-                </div>
+        <section class="events-section" id="programme" aria-labelledby="programme-title">
+            <p class="eyebrow">Together with our favourite people</p>
+            <h2 class="events-title" id="programme-title">Our wedding day</h2>
+            <p class="section-intro">We can't wait to celebrate with you. Please refer to your invitation for the celebrations you're joining.</p>
+            <p class="update-note">A little preview of the day &mdash; timings are approximate and may change. All times are Singapore time.</p>
+            <div class="programme-grid">
+                <article class="programme-card">
+                    <p class="eyebrow">The morning</p><h3>Church &amp; lunch</h3>
+                    <p class="venue">Zion Presbyterian Church</p>
+                    <ol class="schedule">
+                        <li><span class="schedule-time">10:30&ndash;11:30 am</span><div><strong>Church solemnization</strong><p>Join us as we say &ldquo;I do&rdquo;. Please arrive before the ceremony begins.</p></div></li>
+                        <li><span class="schedule-time">11:30 am&ndash;12:15 pm</span><div><strong>Group photographs</strong><p>Stay for a photo with us; we'll take these group by group.</p></div></li>
+                        <li><span class="schedule-time">12:45&ndash;2:00 pm</span><div><strong>Lunch &amp; mingling</strong><p>Enjoy lunch and catch up with family and friends.</p></div></li>
+                    </ol>
+                    <a href="#church-travel">Church travel details &rarr;</a>
+                </article>
+                <article class="programme-card">
+                    <p class="eyebrow">The evening</p><h3>Dinner celebration</h3>
+                    <p class="venue">Pan Pacific Singapore<br>Ocean Ballroom, Level 2</p>
+                    <ol class="schedule">
+                        <li><span class="schedule-time">Arrival time</span><div><strong>To be confirmed</strong><p>We'll share the reception and seating time closer to the day.</p></div></li>
+                        <li><span class="schedule-time">7:45 pm</span><div><strong>Let the celebration begin</strong><p>Our first march-in, followed by cake cutting, dinner, speeches, games, a toast and photographs.</p></div></li>
+                    </ol>
+                    <p class="small-note">The evening's programme will unfold from 7:45 pm. Finish time to be confirmed.</p>
+                    <a href="#hotel-travel">Hotel travel details &rarr;</a>
+                </article>
             </div>
-        </div>
+        </section>
+
+        <section class="events-section" id="travel" aria-labelledby="travel-title">
+            <p class="eyebrow">Find your way</p><h2 class="events-title" id="travel-title">Getting there &amp; parking</h2>
+            <div class="programme-grid">
+                <article class="programme-card" id="church-travel">
+                    <h3>Zion Presbyterian Church</h3>
+                    <p>The exact address, map pin and public transport directions will be confirmed here before the day.</p>
+                    <h4>Driving &amp; parking</h4><p>Church parking arrangements and the drop-off point are being confirmed. Please check back before travelling.</p>
+                </article>
+                <article class="programme-card" id="hotel-travel">
+                    <h3>Pan Pacific Singapore</h3>
+                    <p>Ocean Ballroom, Level 2</p>
+                    <a class="travel-link" href="https://www.google.com/maps/dir/?api=1&amp;destination=Pan+Pacific+Singapore" target="_blank" rel="noopener noreferrer">Get directions in Google Maps &nearr;</a>
+                    <p><a href="https://www.panpacific.com/en/hotels-and-resorts/pp-marina/the-hotel.html" target="_blank" rel="noopener noreferrer">Hotel location &amp; travel information &nearr;</a></p>
+                    <h4>Driving &amp; parking</h4><p>Wedding parking privileges and collection arrangements are to be confirmed. Please don't assume complimentary parking is available.</p>
+                </article>
+            </div>
+        </section>
+
+        <section class="events-section" id="family" aria-labelledby="family-title">
+            <p class="eyebrow">A moment with our families</p><h2 class="events-title" id="family-title">Tea ceremonies</h2>
+            <p class="section-intro">For relatives taking part in the tea ceremonies. We'll share your exact meeting point and arrival instructions with you directly.</p>
+            <details id="family-details">
+                <summary>View family tea ceremony timings</summary>
+                <ol class="schedule family-schedule">
+                    <li><span class="schedule-time">8:30&ndash;9:00 am</span><div><strong>Bride's relatives</strong><p>Morning tea ceremony &mdash; Home address shared privately.</p></div></li>
+                    <li><span class="schedule-time">5:30&ndash;6:00 pm</span><div><strong>Shawn's paternal family</strong><p>Pan Pacific Singapore &mdash; Room to be confirmed.</p></div></li>
+                    <li><span class="schedule-time">6:00&ndash;6:30 pm</span><div><strong>Shawn's maternal family</strong><p>Pan Pacific Singapore &mdash; Room to be confirmed.</p></div></li>
+                    <li><span class="schedule-time">6:30&ndash;7:00 pm</span><div><strong>Wendy's maternal family</strong><p>Pan Pacific Singapore &mdash; Room to be confirmed.</p></div></li>
+                </ol>
+                <p class="small-note">These are provisional ceremony times. Please follow the arrival time in your family reminder.</p>
+            </details>
+        </section>
+
+        <section class="events-section help-section" aria-labelledby="help-title">
+            <h2 class="events-title" id="help-title">A little help before the day</h2>
+            <p>If your plans or dietary needs have changed, or you need help with access or transport, please message Shawn or Wendy in your existing chat.</p>
+            <p>Save this page and check it again during the week of the wedding for the latest details.</p>
+        </section>
 
         <!-- Guest Photo Collection -->
         <section class="events-section photos-section" id="photos" aria-labelledby="photos-title">
@@ -88,236 +134,8 @@
             <noscript><p>Please enable JavaScript in your browser to use our photo album.</p></noscript>
         </section>
 
-        <!-- RSVP Form -->
-        <div class="rsvp-section">
-            <h2 class="rsvp-title">RSVP</h2>
-            <p class="rsvp-subtitle">We can't wait to celebrate with you! 💕</p>
-
-            <!-- Progress Steps -->
-            <div class="form-steps">
-                <div class="step active" data-step="1">
-                    <div class="step-number">1</div>
-                    <span>Your Info</span>
-                </div>
-                <div class="step" data-step="2">
-                    <div class="step-number">2</div>
-                    <span>Events</span>
-                </div>
-                <div class="step" data-step="3">
-                    <div class="step-number">3</div>
-                    <span>Details</span>
-                </div>
-            </div>
-
-            <form id="rsvpForm">
-                <!-- Step 1: Personal Info -->
-                <div class="form-step" data-step="1">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label class="form-label" for="fullName">
-                                Your Name <span class="required-mark">*</span>
-                            </label>
-                            <input type="text" class="form-input" id="fullName" required placeholder="Enter your full name">
-                            <div class="error-message" id="nameError">Please enter your name</div>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label" for="phone">
-                                Phone Number <span class="required-mark">*</span>
-                            </label>
-                            <input type="tel" class="form-input" id="phone" required placeholder="Enter your phone number">
-                            <div class="error-message" id="phoneError">Please enter your phone number</div>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="email">
-                            Email Address <span class="required-mark">*</span>
-                        </label>
-                        <input type="email" class="form-input" id="email" required placeholder="Enter your email address">
-                        <div class="error-message" id="emailError">Please enter a valid email address</div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">
-                            Friend of... <span class="required-mark">*</span>
-                        </label>
-                        <div class="options-grid">
-                            <label class="option-card">
-                                <input type="radio" id="friend-bride" name="friendOf" value="Bride" required>
-                                <div class="option-content">
-                                    <div class="option-icon"></div>
-                                    <div class="option-text">
-                                        <div class="option-title">The Cutest Bride 👰</div>
-                                        <div class="option-subtitle">Wendy's guest</div>
-                                    </div>
-                                </div>
-                            </label>
-                            <label class="option-card">
-                                <input type="radio" id="friend-groom" name="friendOf" value="Groom">
-                                <div class="option-content">
-                                    <div class="option-icon"></div>
-                                    <div class="option-text">
-                                        <div class="option-title">The Charming Groom 🤵</div>
-                                        <div class="option-subtitle">Shawn's guest</div>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label">
-                            Bringing a +1? <span class="required-mark">*</span>
-                        </label>
-                        <div class="options-grid">
-                            <label class="option-card">
-                                <input type="radio" id="plus-one-no" name="plusOne" value="No" required>
-                                <div class="option-content">
-                                    <div class="option-icon"></div>
-                                    <div class="option-text">
-                                        <div class="option-title">Flying Solo ✨</div>
-                                        <div class="option-subtitle">Just me!</div>
-                                    </div>
-                                </div>
-                            </label>
-                            <label class="option-card">
-                                <input type="radio" id="plus-one-yes" name="plusOne" value="Yes">
-                                <div class="option-content">
-                                    <div class="option-icon"></div>
-                                    <div class="option-text">
-                                        <div class="option-title">Bringing a +1 💑</div>
-                                        <div class="option-subtitle">Plus one guest</div>
-                                    </div>
-                                </div>
-                            </label>
-                        </div>
-                    </div>
-
-                    <div class="form-group" id="plusOneNameSection" style="display: none;">
-                        <label class="form-label" for="plusOneName">
-                            Your +1's Name <span class="required-mark">*</span>
-                        </label>
-                        <input type="text" class="form-input" id="plusOneName" placeholder="Enter guest name">
-                        <div class="error-message" id="plusOneNameError">Please enter your +1's name</div>
-                    </div>
-                </div>
-
-                <!-- Step 2: Event Selection -->
-                <div class="form-step" data-step="2" style="display: none;">
-                    <div class="form-group">
-                        <label class="form-label">
-                            Select Events to Attend <span class="required-mark">*</span>
-                        </label>
-
-                        <div class="guests-grid" id="guestsGrid">
-                            <!-- Your Events -->
-                            <div class="guest-card" id="yourCard">
-                                <div class="guest-card-header">
-                                    <span class="guest-card-icon">👤</span>
-                                    <h3 class="guest-card-title">You</h3>
-                                </div>
-                                <div class="event-checkbox-group">
-                                    <div class="event-checkbox" id="yourChurchCard">
-                                        <div class="event-checkbox-header">
-                                            <input type="checkbox" id="yourChurch" name="yourEvents" value="Church">
-                                            <label for="yourChurch" class="event-name">⛪ Church & Lunch</label>
-                                        </div>
-                                        <div class="event-details">10:30 AM - 12:30 PM</div>
-                                        <div class="event-options" id="yourChurchOptions">
-                                            <div class="form-group" style="margin-bottom: 0;">
-                                                <label class="form-label" for="yourLunchDietary" style="font-size: 12px;">Lunch Dietary Needs (optional)</label>
-                                                <textarea class="form-input" id="yourLunchDietary" rows="2" placeholder="e.g. vegetarian, nut allergy, halal"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="event-checkbox" id="yourReceptionCard">
-                                        <div class="event-checkbox-header">
-                                            <input type="checkbox" id="yourReception" name="yourEvents" value="Reception">
-                                            <label for="yourReception" class="event-name">🎉 Reception & Dinner</label>
-                                        </div>
-                                        <div class="event-details">7:00 PM - 11:00 PM</div>
-                                        <div class="event-options" id="yourReceptionOptions">
-                                            <div class="form-group" style="margin-bottom: 0;">
-                                                <label class="form-label" for="yourDinnerDietary" style="font-size: 12px;">Dinner Dietary Needs (optional)</label>
-                                                <input type="text" class="form-input" id="yourDinnerDietary" placeholder="e.g. vegetarian, nut allergy, halal">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Plus One Events -->
-                            <div class="guest-card disabled" id="plusOneCard">
-                                <div class="guest-card-header">
-                                    <span class="guest-card-icon">💑</span>
-                                    <h3 class="guest-card-title" id="plusOneCardTitle">Your +1</h3>
-                                </div>
-                                <div class="event-checkbox-group">
-                                    <div class="event-checkbox" id="plusOneChurchCard">
-                                        <div class="event-checkbox-header">
-                                            <input type="checkbox" id="plusOneChurch" name="plusOneEvents" value="Church">
-                                            <label for="plusOneChurch" class="event-name">⛪ Church & Lunch</label>
-                                        </div>
-                                        <div class="event-details">10:30 AM - 12:30 PM</div>
-                                        <div class="event-options" id="plusOneChurchOptions">
-                                            <div class="form-group" style="margin-bottom: 0;">
-                                                <label class="form-label" for="plusOneLunchDietary" style="font-size: 12px;">Lunch Dietary Needs (optional)</label>
-                                                <textarea class="form-input" id="plusOneLunchDietary" rows="2" placeholder="e.g. vegetarian, nut allergy, halal"></textarea>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="event-checkbox" id="plusOneReceptionCard">
-                                        <div class="event-checkbox-header">
-                                            <input type="checkbox" id="plusOneReception" name="plusOneEvents" value="Reception">
-                                            <label for="plusOneReception" class="event-name">🎉 Reception & Dinner</label>
-                                        </div>
-                                        <div class="event-details">7:00 PM - 11:00 PM</div>
-                                        <div class="event-options" id="plusOneReceptionOptions">
-                                            <div class="form-group" style="margin-bottom: 0;">
-                                                <label class="form-label" for="plusOneDinnerDietary" style="font-size: 12px;">Dinner Dietary Needs (optional)</label>
-                                                <input type="text" class="form-input" id="plusOneDinnerDietary" placeholder="e.g. vegetarian, nut allergy, halal">
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="error-message" id="eventsError">Please select at least one event</div>
-                    </div>
-                </div>
-
-                <!-- Step 3: Additional Details -->
-                <div class="form-step" data-step="3" style="display: none;">
-                    <div class="form-group">
-                        <label class="form-label" for="song">Song Request (Optional)</label>
-                        <input type="text" class="form-input" id="song" placeholder="A song you'd like to hear at the reception">
-                    </div>
-
-                    <div class="form-group">
-                        <label class="form-label" for="message">Message for the Couple (Optional)</label>
-                        <textarea class="form-input" id="message" placeholder="Share your well wishes or a favorite memory"></textarea>
-                    </div>
-                </div>
-
-                <!-- Form Actions -->
-                <div class="form-actions">
-                    <button type="button" class="btn btn-secondary" id="prevBtn" style="display: none;">Previous</button>
-                    <button type="button" class="btn btn-primary" id="nextBtn">Continue</button>
-                    <button type="submit" class="btn btn-primary" id="submitBtn" style="display: none;">Send RSVP</button>
-                </div>
-            </form>
-        </div>
     </div>
-
-    <!-- Success Modal -->
-    <div class="modal-overlay" id="successModal">
-        <div class="modal">
-            <div class="modal-icon">✓</div>
-            <h3 class="modal-title">RSVP Confirmed!</h3>
-            <p class="modal-text">Thank you for your response. We can't wait to celebrate with you on our special day!</p>
-            <button class="btn btn-primary" onclick="closeModal()">Close</button>
-        </div>
-    </div>
+    <footer>With love, Shawn &amp; Wendy <span>28 November 2026</span></footer>
 
     <audio id="bgMusic" loop>
         <!-- Music source will be set dynamically -->
