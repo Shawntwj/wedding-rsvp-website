@@ -5,7 +5,7 @@ const CONFIG = {
     CAROUSEL_INTERVAL: 5000, // 5 seconds
     CAROUSEL_IMAGES_PATH: 'resources/img/',
     // The number of images to try loading (adjust this based on how many images you have)
-    MAX_IMAGE_COUNT: 23,
+    MAX_IMAGE_COUNT: 22,
 };
 
 // ============================================

@@ -21,7 +21,7 @@ def get_image_files(directory: Path) -> List[Path]:
     return files
 
 def extract_number(filename: str) -> int:
-    """Extract number from filename like 'sample12.jpeg' -> 12"""
+    """Extract number from filename like 'photo12.jpeg' -> 12"""
     import re
     match = re.search(r'(\d+)', filename)
     return int(match.group(1)) if match else 0
@@ -44,7 +44,7 @@ def rename_images(directory: Path, dry_run: bool = False) -> None:
 
     for index, file_path in enumerate(image_files, start=1):
         extension = file_path.suffix
-        new_name = f"sample{index}{extension}"
+        new_name = f"photo{index}{extension}"
         new_path = file_path.parent / new_name
 
         if file_path.name != new_name:
