@@ -72,7 +72,8 @@ const Carousel = {
     stopAutoPlay() {
         clearInterval(this.autoPlayTimer);
         this.autoPlayTimer = null;
-        this.pauseButton.textContent = 'Play';
+        this.pauseButton.dataset.playing = 'false';
+        this.pauseButton.title = 'Play slideshow';
         this.pauseButton.setAttribute('aria-label', 'Play photo slideshow');
     },
 
@@ -80,7 +81,8 @@ const Carousel = {
         this.stopAutoPlay();
         if (this.interacted || this.reducedMotion.matches || document.hidden) return;
         this.autoPlayTimer = setInterval(() => this.goToSlide(this.currentSlide + 1), CONFIG.CAROUSEL_INTERVAL);
-        this.pauseButton.textContent = 'Pause';
+        this.pauseButton.dataset.playing = 'true';
+        this.pauseButton.title = 'Pause slideshow';
         this.pauseButton.setAttribute('aria-label', 'Pause photo slideshow');
     },
 

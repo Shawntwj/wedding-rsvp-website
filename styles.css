@@ -942,3 +942,9 @@ footer span { display: block; font-size: 13px; margin-top: 8px; }
     .carousel-container:hover .carousel-arrow, .carousel-container:focus-within .carousel-arrow { opacity: 0.8; }
 }
 @media (prefers-reduced-motion: reduce) { #carouselPause { display: none; } }
+
+#carouselPause { display: inline-flex; align-items: center; justify-content: center; min-width: 44px; border-radius: 50%; }
+#carouselPause:hover { background: var(--blush); }
+#carouselPause[data-playing="true"] .slideshow-play,
+#carouselPause[data-playing="false"] .slideshow-pause { display: none; }
+@media (prefers-reduced-motion: reduce) { #carouselPause { display: none; } }
