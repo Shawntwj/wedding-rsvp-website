@@ -6,200 +6,7 @@ const CONFIG = {
     CAROUSEL_IMAGES_PATH: 'resources/img/',
     // The number of images to try loading (adjust this based on how many images you have)
     MAX_IMAGE_COUNT: 9,
-    MUSIC_PATH: 'resources/music/',
 };
-
-// ============================================
-// MUSIC AUTOPLAY
-// ============================================
-const MusicControl = {
-    bgMusic: null,
-    controlBtn: null,
-    statusText: null,
-    volumeSlider: null,
-    volumePercentage: null,
-    volumeControl: null,
-    wrapper: null,
-    isPlaying: false,
-    currentSongName: '',
-
-    async discoverMusic() {
-        // Hardcoded music files to avoid console errors from discovery
-        const musicFiles = [
-            'Lauv - Steal The Show.mp3'
-        ];
-
-        console.log(`Loaded ${musicFiles.length} music files:`, musicFiles);
-        return musicFiles;
-    },
-
-    checkMusicExists(filename) {
-        return new Promise((resolve) => {
-            const audio = new Audio();
-            const timeoutId = setTimeout(() => resolve(false), 1000);
-
-            audio.oncanplaythrough = () => {
-                clearTimeout(timeoutId);
-                resolve(true);
-            };
-
-            audio.onerror = () => {
-                clearTimeout(timeoutId);
-                resolve(false);
-            };
-
-            // Preload metadata only to avoid unnecessary downloads
-            audio.preload = 'metadata';
-            audio.src = CONFIG.MUSIC_PATH + filename;
-        });
-    },
-
-    getDisplayName(filename) {
-        // Remove file extension and clean up the name
-        return filename.replace(/\.[^/.]+$/, '');
-    },
-
-    async init() {
-        this.bgMusic = document.getElementById('bgMusic');
-        this.controlBtn = document.getElementById('musicControl');
-        this.statusText = this.controlBtn.querySelector('.music-status');
-        this.volumeSlider = document.getElementById('volumeSlider');
-        this.volumePercentage = document.getElementById('volumePercentage');
-        this.volumeControl = document.getElementById('volumeControl');
-        this.wrapper = document.querySelector('.music-control-wrapper');
-
-        if (!this.bgMusic || !this.controlBtn) return;
-
-        // Discover and randomly select music
-        const musicFiles = await this.discoverMusic();
-        if (musicFiles.length > 0) {
-            const randomIndex = Math.floor(Math.random() * musicFiles.length);
-            const selectedMusic = musicFiles[randomIndex];
-
-            // Update audio source
-            this.bgMusic.src = CONFIG.MUSIC_PATH + selectedMusic;
-            this.currentSongName = this.getDisplayName(selectedMusic);
-
-            // Update the music title in the UI
-            const musicTitle = this.controlBtn.querySelector('.music-title');
-            if (musicTitle) {
-                musicTitle.textContent = this.currentSongName;
-            }
-
-            console.log(`Selected music: ${selectedMusic}`);
-        }
-
-        // Set initial volume
-        const initialVolume = 0.5;
-        this.bgMusic.volume = initialVolume;
-        this.volumeSlider.value = initialVolume * 100;
-        this.updateVolumeUI();
-
-        // Try to autoplay
-        this.bgMusic.play()
-            .then(() => {
-                this.isPlaying = true;
-                this.updatePlaybackUI();
-            })
-            .catch(() => {
-                // If autoplay fails, wait for user interaction
-                this.isPlaying = false;
-                this.updatePlaybackUI();
-                document.addEventListener('click', () => this.play(), { once: true });
-            });
-
-        // Add click handler to toggle music
-        this.controlBtn.addEventListener('click', (e) => {
-            e.stopPropagation();
-            this.toggle();
-        });
-
-        // Add volume slider handler
-        this.volumeSlider.addEventListener('input', (e) => {
-            const volume = e.target.value / 100;
-            this.setVolume(volume);
-        });
-
-        // Mobile: toggle volume control visibility on tap
-        if ('ontouchstart' in window) {
-            this.controlBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                this.wrapper.classList.toggle('show-volume');
-            });
-
-            // Close volume control when tapping outside
-            document.addEventListener('click', (e) => {
-                if (!this.wrapper.contains(e.target)) {
-                    this.wrapper.classList.remove('show-volume');
-                }
-            });
-        }
-    },
-
-    play() {
-        if (this.bgMusic && this.bgMusic.paused) {
-            this.bgMusic.play();
-            this.isPlaying = true;
-            this.updatePlaybackUI();
-        }
-    },
-
-    pause() {
-        if (this.bgMusic && !this.bgMusic.paused) {
-            this.bgMusic.pause();
-            this.isPlaying = false;
-            this.updatePlaybackUI();
-        }
-    },
-
-    toggle() {
-        if (this.isPlaying) {
-            this.pause();
-        } else {
-            this.play();
-        }
-    },
-
-    setVolume(volume) {
-        if (this.bgMusic) {
-            this.bgMusic.volume = volume;
-            this.updateVolumeUI();
-        }
-    },
-
-    updatePlaybackUI() {
-        if (this.isPlaying) {
-            this.controlBtn.classList.remove('paused');
-            this.statusText.textContent = 'Music Playing';
-        } else {
-            this.controlBtn.classList.add('paused');
-            this.statusText.textContent = 'Music Paused';
-        }
-    },
-
-    updateVolumeUI() {
-        const volume = this.bgMusic.volume;
-        const percentage = Math.round(volume * 100);
-
-        // Update percentage display
-        this.volumePercentage.textContent = `${percentage}%`;
-
-        // Update slider gradient
-        const gradientValue = percentage;
-        this.volumeSlider.style.background = `linear-gradient(to right, var(--rose) 0%, var(--rose) ${gradientValue}%, var(--border) ${gradientValue}%, var(--border) 100%)`;
-
-        // Toggle muted class
-        if (percentage === 0) {
-            this.volumeControl.classList.add('muted');
-        } else {
-            this.volumeControl.classList.remove('muted');
-        }
-    }
-};
-
-async function initMusic() {
-    await MusicControl.init();
-}
 
 // ============================================
 // CAROUSEL MODULE
@@ -365,7 +172,6 @@ const Carousel = {
 };
 
 document.addEventListener('DOMContentLoaded', async () => {
-    initMusic();
     await Carousel.init();
 });
 
@@ -378,4 +184,17 @@ revealFamilySection();
 window.addEventListener('hashchange', revealFamilySection);
 window.addEventListener('resize', () => {
     if (Carousel.totalSlides) Carousel.goToSlide(Carousel.currentSlide);
+});
+
+// The widget loader compares message origins with a URL containing /w.
+// Accept its resize messages using the actual origin and mounted frame source.
+window.addEventListener('message', (event) => {
+    if (event.origin !== 'https://www.wedibox.com') return;
+    const frame = document.querySelector('#wedibox-embed iframe');
+    if (!frame || event.source !== frame.contentWindow) return;
+    const data = event.data;
+    if (!data || data.type !== 'WEDIBOX_WIDGET_RESIZE') return;
+    const height = data.payload?.height;
+    if (typeof height !== 'number' || !Number.isFinite(height) || height < 320) return;
+    frame.style.height = `${Math.ceil(height)}px`;
 });

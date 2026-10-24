@@ -9,27 +9,6 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Music Control Button -->
-    <div class="music-control-wrapper">
-        <button id="musicControl" class="music-control" aria-label="Music control">
-            <svg class="music-icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M9 18V5l12-2v13M9 18c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3zm12-2c0 1.657-1.343 3-3 3s-3-1.343-3-3 1.343-3 3-3 3 1.343 3 3z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <div class="music-info">
-                <span class="music-status">Music Playing</span>
-                <span class="music-title">Steal The Show</span>
-            </div>
-        </button>
-        <div class="volume-control" id="volumeControl">
-            <svg class="volume-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M11 5L6 9H2v6h4l5 4V5z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                <path class="volume-wave" d="M15.54 8.46a5 5 0 010 7.07M19.07 4.93a10 10 0 010 14.14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            <input type="range" id="volumeSlider" class="volume-slider" min="0" max="100" value="50" aria-label="Volume control">
-            <span class="volume-percentage" id="volumePercentage">50%</span>
-        </div>
-    </div>
-
     <!-- Hero Section -->
     <div class="hero">
         <div class="hero-content">
@@ -40,7 +19,7 @@
             <p class="hero-date">Saturday, 28 November 2026</p>
             <p class="hero-subtitle">All the little details for our big day</p>
             <nav class="guest-nav" aria-label="Wedding information">
-                <a href="#programme">Programme</a><a href="#travel">Getting there</a><a href="#family">For family</a><a href="#photos">Share photos</a>
+                <a href="#programme">Programme</a><a href="#travel">Getting there</a><a href="#family">For family</a><a href="#photos">Try photo sharing</a>
             </nav>
 
             <div class="hero-image">
@@ -125,21 +104,52 @@
             <p>Save this page and check it again during the week of the wedding for the latest details.</p>
         </section>
 
-        <!-- Guest Photo Collection -->
+        <!-- Photo-sharing prototype comparison -->
         <section class="events-section photos-section" id="photos" aria-labelledby="photos-title">
-            <h2 class="events-title" id="photos-title">Our Day Through Your Eyes</h2>
-            <p class="photos-description">We'd love to see the moments you capture! Share your photos and videos from our wedding below.</p>
-            <!-- Wedibox Photo Collection -->
+            <h2 class="events-title" id="photos-title">Try Our Photo-Sharing Options</h2>
+            <p class="section-intro">Help us choose our wedding photo-sharing platform! Try the options below and tell us which feels easiest to use.</p>
+            <div class="photo-options-grid">
+                <article class="photo-option" aria-labelledby="guestpix-title">
+                    <h3 id="guestpix-title">GuestPix</h3>
+                    <div class="photo-option-qr"><img src="resources/qrcode/guestpix.jpeg" alt="QR code for GuestPix" width="224" height="224"></div>
+                    <p>Scan to try uploading and viewing photos.</p>
+                    <a class="photo-option-link" href="https://my.guestpix.com/guest/185418/access/OTZFH9uO" target="_blank" rel="noopener noreferrer">Try GuestPix</a>
+                </article>
+                <article class="photo-option" aria-labelledby="kululu-title">
+                    <h3 id="kululu-title">Kululu</h3>
+                    <div class="photo-option-qr"><img src="resources/qrcode/kululu.png" alt="QR code for Kululu" width="224" height="224"></div>
+                    <p>Scan to try uploading and viewing photos.</p>
+                    <a class="photo-option-link" href="https://app.kululu.com/cewnaj" target="_blank" rel="noopener noreferrer">Try Kululu</a>
+                </article>
+                <article class="photo-option" aria-labelledby="google-photos-title">
+                    <h3 id="google-photos-title">Google Photos</h3>
+                    <div class="photo-option-qr"><img src="resources/qrcode/google_photo.jpg" alt="QR code for Google Photos" width="224" height="224"></div>
+                    <p>Scan to try uploading and viewing photos.</p>
+                    <a class="photo-option-link" href="https://photos.app.goo.gl/xv6GZ2MR18VKw29i6" target="_blank" rel="noopener noreferrer">Try Google Photos</a>
+                </article>
+                <article class="photo-option" aria-labelledby="warpbin-title">
+                    <h3 id="warpbin-title">Warpbin</h3>
+                    <div class="photo-option-qr"><img src="resources/qrcode/warpbin.png" alt="QR code for Warpbin" width="224" height="224"></div>
+                    <p>Scan to try uploading and viewing photos.</p>
+                    <a class="photo-option-link" href="https://warpbin.com/svoUO3DrPR" target="_blank" rel="noopener noreferrer">Try Warpbin</a>
+                </article>
+            </div>
+        </section>
+
+        <section class="events-section wedibox-section" id="wedibox" aria-labelledby="wedibox-title">
+            <div class="wedibox-intro">
+                <p class="eyebrow">Another photo-sharing option to try</p>
+                <h2 class="events-title" id="wedibox-title">Wedibox</h2>
+                <p class="section-intro">Upload your favourite moments and explore the shared gallery below. You can also scan the QR code or open Wedibox on your phone.</p>
+                <div class="photo-option-qr"><img src="resources/qrcode/wedibox.png" alt="QR code for Wedibox" width="224" height="224"></div>
+                <a class="photo-option-link" href="https://www.wedibox.com/w/photo-collection/recrSFgZzreEvclp" target="_blank" rel="noopener noreferrer">Open Wedibox</a>
+            </div>
             <div id="wedibox-embed" data-event="3b2b8648-f7a3-4f36-8a65-7399a1813550"></div>
-            <noscript><p>Please enable JavaScript in your browser to use our photo album.</p></noscript>
+            <noscript><p>Enable JavaScript to view the embedded gallery, or use the Open Wedibox link above.</p></noscript>
         </section>
 
     </div>
     <footer>With love, Shawn &amp; Wendy <span>28 November 2026</span></footer>
-
-    <audio id="bgMusic" loop>
-        <!-- Music source will be set dynamically -->
-    </audio>
 
     <script src="script.js"></script>
     <script src="https://embed.wedibox.com/widget.js" async></script>

@@ -24,227 +24,6 @@ body {
     line-height: 1.6;
 }
 
-/* Music Control Button */
-.music-control-wrapper {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    z-index: 1000;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    align-items: flex-end;
-}
-
-.music-control {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.95);
-    border: 2px solid var(--border);
-    border-radius: 50px;
-    box-shadow: 0 4px 20px rgba(139, 90, 111, 0.15);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    backdrop-filter: blur(10px);
-}
-
-.music-control:hover {
-    background: rgba(255, 255, 255, 1);
-    box-shadow: 0 6px 25px rgba(139, 90, 111, 0.25);
-    transform: translateY(-2px);
-}
-
-.music-control.paused {
-    opacity: 0.7;
-}
-
-.music-control.paused .music-status::before {
-    content: '⏸ ';
-}
-
-.music-icon {
-    color: var(--rose);
-    flex-shrink: 0;
-    animation: musicPulse 2s ease-in-out infinite;
-}
-
-.music-control.paused .music-icon {
-    animation: none;
-    opacity: 0.5;
-}
-
-@keyframes musicPulse {
-    0%, 100% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-}
-
-.music-info {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-    min-width: 0;
-}
-
-.music-status {
-    font-size: 11px;
-    color: var(--text-light);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    font-weight: 600;
-}
-
-.music-status::before {
-    content: '▶ ';
-}
-
-.music-title {
-    font-size: 14px;
-    color: var(--deep-rose);
-    font-weight: 500;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-}
-
-/* Volume Control */
-.volume-control {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 12px 20px;
-    background: rgba(255, 255, 255, 0.95);
-    border: 2px solid var(--border);
-    border-radius: 50px;
-    box-shadow: 0 4px 20px rgba(139, 90, 111, 0.15);
-    backdrop-filter: blur(10px);
-    transition: all 0.3s ease;
-    opacity: 0;
-    transform: translateY(-10px);
-    pointer-events: none;
-}
-
-.music-control-wrapper:hover .volume-control {
-    opacity: 1;
-    transform: translateY(0);
-    pointer-events: all;
-}
-
-.volume-icon {
-    color: var(--mauve);
-    flex-shrink: 0;
-}
-
-.volume-control.muted .volume-wave {
-    opacity: 0.3;
-}
-
-.volume-slider {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(to right, var(--rose) 0%, var(--rose) 50%, var(--border) 50%, var(--border) 100%);
-    border-radius: 5px;
-    outline: none;
-    transition: all 0.2s ease;
-}
-
-.volume-slider::-webkit-slider-thumb {
-    -webkit-appearance: none;
-    appearance: none;
-    width: 14px;
-    height: 14px;
-    background: var(--deep-rose);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(139, 90, 111, 0.3);
-}
-
-.volume-slider::-webkit-slider-thumb:hover {
-    transform: scale(1.2);
-    box-shadow: 0 3px 6px rgba(139, 90, 111, 0.4);
-}
-
-.volume-slider::-moz-range-thumb {
-    width: 14px;
-    height: 14px;
-    background: var(--deep-rose);
-    border-radius: 50%;
-    cursor: pointer;
-    border: none;
-    transition: all 0.2s ease;
-    box-shadow: 0 2px 4px rgba(139, 90, 111, 0.3);
-}
-
-.volume-slider::-moz-range-thumb:hover {
-    transform: scale(1.2);
-    box-shadow: 0 3px 6px rgba(139, 90, 111, 0.4);
-}
-
-.volume-percentage {
-    font-size: 12px;
-    color: var(--text-light);
-    font-weight: 600;
-    min-width: 35px;
-    text-align: right;
-}
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-    .music-control-wrapper {
-        top: 15px;
-        right: 15px;
-    }
-
-    .music-control {
-        padding: 10px 16px;
-        gap: 10px;
-    }
-
-    .music-icon {
-        width: 20px;
-        height: 20px;
-    }
-
-    .music-status {
-        font-size: 10px;
-    }
-
-    .music-title {
-        font-size: 12px;
-        max-width: 120px;
-    }
-
-    .volume-control {
-        padding: 10px 16px;
-        gap: 10px;
-    }
-
-    .volume-slider {
-        width: 50px;
-    }
-
-    .volume-icon {
-        width: 18px;
-        height: 18px;
-    }
-
-    .volume-percentage {
-        font-size: 11px;
-        min-width: 30px;
-    }
-
-    /* Show volume control on tap for mobile */
-    .music-control-wrapper.show-volume .volume-control {
-        opacity: 1;
-        transform: translateY(0);
-        pointer-events: all;
-    }
-}
-
 /* Hero Section */
 .hero {
     position: relative;
@@ -1159,4 +938,29 @@ footer span { display: block; font-size: 13px; margin-top: 8px; }
 @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after { animation: none !important; transition: none !important; }
+}
+
+/* Photo-sharing comparison */
+.photo-options-grid { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px; max-width: 720px; margin: 0 auto; }
+.photo-option { display: flex; flex-direction: column; align-items: center; gap: 18px; padding: 24px 16px; border: 1px solid var(--border); border-radius: 12px; text-align: center; min-width: 0; }
+.photo-option h3, .photo-options-feedback h3 { font-family: 'Playfair Display', serif; color: var(--deep-rose); font-size: 24px; }
+.photo-option-qr { width: 256px; max-width: 100%; aspect-ratio: 1; padding: 16px; background: #fff; display: grid; place-items: center; }
+.photo-option-qr img { display: block; width: 100%; height: 100%; min-height: 0; object-fit: contain; }
+.photo-option-link { margin-top: auto; padding: 12px 20px; border: 1px solid var(--border); border-radius: 30px; }
+.photo-option-link { background: var(--cream); font-weight: 600; }
+.photo-option-link:hover { background: var(--blush); }
+.photo-options-feedback { margin-top: 32px; padding: 24px; border-radius: 12px; background: var(--cream); text-align: center; }
+.photo-options-feedback p { max-width: 620px; margin: 12px auto 0; }
+
+
+/* Give the embedded gallery the full content width, outside the provider cards. */
+.events-section.wedibox-section { padding: 32px 12px 12px; }
+.wedibox-intro { text-align: center; padding: 0 12px 28px; }
+.wedibox-intro .photo-option-qr { margin: 0 auto 20px; }
+.wedibox-intro .photo-option-link { display: inline-block; }
+/* Override the widget's inline 320px minimum; reported content height can grow further. */
+#wedibox-embed iframe { min-height: 760px !important; width: 100%; }
+@media (max-width: 700px) {
+    .events-section.wedibox-section { padding: 28px 6px 6px; }
+    #wedibox-embed iframe { min-height: 900px !important; }
 }
