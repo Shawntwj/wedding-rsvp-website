@@ -15,7 +15,9 @@ Static guest information page for Shawn and Wendy, 28 November 2026. Open index.
 
 ## Before sending to guests
 
-Confirm the church address/map pin, public transport route, parking/drop-off, dinner reception/seating time, dinner finish time, hotel parking privileges, tea ceremony room and family arrival instructions. Confirm the existing date and Ocean Ballroom, Level 2. The working schedule lists lunch at 12:45 pm; confirm whether guests can eat earlier during wedding party photos (12:15-12:45 pm).
+Confirm parking/drop-off, dinner reception/seating time, dinner finish time, hotel parking privileges, tea ceremony room and family arrival instructions. Confirm the existing date and Ocean Ballroom, Level 2. The working schedule lists lunch at 12:45 pm; confirm whether guests can eat earlier during wedding party photos (12:15-12:45 pm).
+
+Each celebration combines its programme with the supplied venue address, responsive Google Maps embed and directions link. Church: Zion Presbyterian Church, 535 Upper Changi Rd, Singapore 486975. Dinner: Pan Pacific Singapore, 7 Raffles Blvd, Singapore 039595. Parking details are expandable. The share-generated map embeds require no API key.
 
 The hotel travel link points to its official location information: https://www.panpacific.com/en/hotels-and-resorts/pp-marina/the-hotel.html
 
