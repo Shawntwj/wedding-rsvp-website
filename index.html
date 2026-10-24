@@ -23,14 +23,17 @@
             </nav>
 
             <div class="hero-image">
-                <div class="carousel-container">
+                <div class="carousel-container" tabindex="0" role="region" aria-label="Photos of Wendy and Shawn" aria-roledescription="carousel">
                     <div class="carousel-track" id="carouselTrack">
                         <!-- Carousel slides will be dynamically loaded -->
                     </div>
                     <button class="carousel-arrow carousel-arrow-left" id="prevSlide" aria-label="Previous slide">‹</button>
                     <button class="carousel-arrow carousel-arrow-right" id="nextSlide" aria-label="Next slide">›</button>
-                    <div class="carousel-dots" id="carouselDots"></div>
                 </div>
+            </div>
+            <div class="carousel-caption">
+                <span id="carouselCounter" aria-label="Photo position">1 / 22</span>
+                <button id="carouselPause" type="button" aria-label="Pause photo slideshow">Pause</button>
             </div>
         </div>
     </div>
