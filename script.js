@@ -5,7 +5,7 @@ const CONFIG = {
     CAROUSEL_INTERVAL: 5000, // 5 seconds
     CAROUSEL_IMAGES_PATH: 'resources/img/',
     // The number of images to try loading (adjust this based on how many images you have)
-    MAX_IMAGE_COUNT: 9,
+    MAX_IMAGE_COUNT: 23,
 };
 
 // ============================================
@@ -36,16 +36,16 @@ const Carousel = {
     },
 
     async discoverImages() {
-        const imageExtensions = ['jpeg', 'jpg', 'png', 'gif', 'webp'];
+        const imageExtensions = ['jpg', 'jpeg', 'png', 'gif', 'webp'];
         const discoveredImages = [];
         let consecutiveMisses = 0;
 
-        // Try to load images sequentially (sample1.jpeg, sample2.jpeg, etc.)
+        // Try to load images sequentially (photo1.jpg, photo2.jpg, etc.)
         for (let i = 1; i <= CONFIG.MAX_IMAGE_COUNT; i++) {
             // Try each extension
             let found = false;
             for (const ext of imageExtensions) {
-                const filename = `sample${i}.${ext}`;
+                const filename = `photo${i}.${ext}`;
                 const exists = await this.checkImageExists(filename);
 
                 if (exists) {
