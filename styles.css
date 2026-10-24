@@ -894,6 +894,7 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .schedule-time { display: block; font-weight: 600; font-size: 14px; color: var(--deep-rose); margin-bottom: 6px; }
 .schedule p, .small-note { font-size: 14px; color: var(--text-light); }
 .small-note { margin-top: 16px; margin-bottom: 20px; }
+.transport-notes { padding-left: 20px; }
 .travel-link { display: inline-block; margin: 18px 0; }
 summary { cursor: pointer; padding: 16px; background: var(--cream); border-radius: 8px; color: var(--deep-rose); font-weight: 600; }
 .family-schedule { margin-left: 16px; }
